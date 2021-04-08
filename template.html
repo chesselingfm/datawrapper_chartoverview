@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <style type="text/css">
+      a {color: blue; text-decoration: underline;}
+  
+      .wrapper {
+  width:800px;
+  padding:20px;
+  background-color: #e8e8e8;
+
+  /* Floated elements don't use any height. Adding "overflow:hidden;" forces the
+     parent element to expand to contain its floated children. */
+  overflow:hidden;
+}
+
+.left {
+  width:45%px;
+  float:left;
+  background-color:blue;
+}
+
+.right {
+  width:45%;
+  float:right;
+  background-color:yellow;
+}
+  </style>
+  <body>
+    <header id='pageheader'>
+    
+        
+        </div>
+
+        </div>
+    </header>
+        <div id="blocker"></div>
+        <div id="page">
+    <div class="pagepadding">  
+        <br/><br/><br/><br/><br/><br/>
+    <h1>Chart-Übersicht</h1>
+    <br>
+    <br>
+    <p>Fragen? <a href="mailto: ">data@ndr.de</a></p>
+    <br>
+    <div class="wrapper">
+    <br>
+
+    {% for key, value in mydata.items() %}      
+    <div class="container">
+    
+    <h1>{{value['title']}}</h1> 
+    <div style="width:60%; height:100%; float:left;">
+    <p><strong>URL: </strong><a href="{{value['url']}}">{{value['url']}}</a></p>
+    <p><strong>letzte Veröffentlichung:</strong> {{value['published']}}</p>
+    <p><strong>ID:</strong> {{value['dw_id']}}</p>
+    <p><strong>Datenquelle lt. Datawrapper:</strong> {{value['datenquelle']}}</p>
+    <p><strong>Kommentar:</strong> {{value['kommentar']}}</p>
+    <p><strong>Responsiver Iframe-Code: (wichtig: den Umbruch vor dem letzten &#60;/script&#62; in Sophora entfernen!)</strong><br> 
+
+        <pre><code>{{value['iframe_code']|safe}}</code></pre>
+        </p>
+    </div>
+    
+
+
+    <div style="width:40%; height:100%; float:right;">
+    <p><a href="{{value['image']}}" download><img src="{{value['image']}}" width="100%"></a></p></div>
+     
+    <br> 
+    <p><strong>SVG herunterladen:</strong> <a href="https://storage.googleapis.com/{{value['dw_id']}}_export.svg" target="_blank">hier klicken</a><br>    <!-- Pfad zum Storage anpassen-->
+  </div>
+  <br>
+  <br>
+  <hl>------------------------------------------------------</hl>
+  <br>
+  <br>
+  <br>
+    {% endfor %}
+
+
+</div>
+</body>
+</html>

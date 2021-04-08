@@ -1,5 +1,4 @@
-# Datawrapper Chart-Übersicht
-
+# Datawrapper Chart Overview
 Some lousy written code to generate a HTML overview page of your Datawrapper charts
 
 ## How to use it

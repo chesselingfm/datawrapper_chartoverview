@@ -5,7 +5,7 @@ Some lousy written code to generate a HTML overview page of your Datawrapper cha
 
 - Just add your Datawrapper chart IDs to the file `datawrapper_id_liste.csv`. One for each line. You can also add comments which will be displayed on the HTML page
 - Get your Datawrapper Token from the settings page (https://app.datawrapper.de/account/api-tokens) and add it here twice: `datawrapper_chart_uebersicht.py`
-- You can refine the HTML template any time
+- You can refine the HTML template any time. Add your custom header or a logo. Change the CSS if you feel like it.
 
 We run this script hourly via cron to get a fresh and beautiful chart overview.
 

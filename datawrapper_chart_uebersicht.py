@@ -7,32 +7,7 @@ import csv
 from google.cloud import storage
 
 
-#%% Uploadordner auf dem Google Storage definieren
-
-def upload_html(filename):
-    storage_client = storage.Client()
-    bucket = storage_client.bucket('BUCKETNAME')
-    path = filename
-    blob = bucket.blob(path)
-    blob.cache_control = 'no-store'
-    blob.upload_from_filename(filename)
-    print(
-        'File {} uploaded'.format(filename)
-    )
-
-def upload_svg(filename):
-    storage_client = storage.Client()
-    bucket = storage_client.bucket('BUCKETNAME')
-    path = 'pictures/' + filename
-    blob = bucket.blob(path)
-    blob.cache_control = 'no-store'
-    blob.upload_from_filename(filename)
-    print(
-        'File {} uploaded'.format(filename)
-    )
-
-
-#%% Hier Datawrapper Token (von der Einstellungsseite) 2x einfügen
+#%% Add your Datawrapper Token here twice. Replace the word TOKEN:
 
 headers = {
     'authorization': 'Bearer TOKEN'}
@@ -40,10 +15,10 @@ headers = {
 svg_headers = {'authorization': 'Bearer TOKEN',
     "Accept": "image/png"}
 
-#%% Lädt CSV Liste mit IDs
+#%% Loading your CSV list with Datawrapper IDs
 list_of_ids = pd.read_csv('datawrapper_id_liste.csv', header=0)
 
-#%%     SVG Output in 1920y1080px für TV - bitte anpassen
+#%% Defining SVG output in 1920x1080px for HD TV - change if you like
 
 svg_querystring = {"unit":"px","mode":"rgb","width":"1920","height":"1060","plain":"true","scale":"1","zoom":"2","download":"false","fullVector":"false","transparent":"false"}
 
@@ -104,7 +79,7 @@ df.columns = ["dw_id", "title", "published", "source", "iframe_code", "iframe", 
 
 payload = df.T.to_dict()
 
-#%%
+#%% Generate HTML
 outputfile = 'datawrapper_chart_uebersicht.html'
 
 subs = jinja2.Environment( 
@@ -112,4 +87,4 @@ subs = jinja2.Environment(
               ).get_template('template.html').render(title=title,mydata=payload) 
 with open(outputfile,'wb') as f: f.write(subs.encode('utf-8'))
 
-upload_html('datawrapper_chart_uebersicht.html')
+

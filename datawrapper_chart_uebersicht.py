@@ -15,6 +15,18 @@ headers = {
 svg_headers = {'authorization': 'Bearer TOKEN',
     "Accept": "image/png"}
 
+
+#%% 
+def upload_svg(svg_filename):
+    # Add you upload stuff here, e.g. FTP, GCS, S3
+    print (svg_filename, 'uploaded')       
+
+def upload_html(filename):
+    # Add you upload stuff here, e.g. FTP, GCS, S3
+    print (filename, 'uploaded')       
+    
+    
+
 #%% Loading your CSV list with Datawrapper IDs
 list_of_ids = pd.read_csv('datawrapper_id_liste.csv', header=0)
 
@@ -80,11 +92,12 @@ df.columns = ["dw_id", "title", "published", "source", "iframe_code", "iframe", 
 payload = df.T.to_dict()
 
 #%% Generate HTML
-outputfile = 'datawrapper_chart_uebersicht.html'
+outputfile = 'datawrapper_chart_overview.html'
 
 subs = jinja2.Environment( 
               loader=jinja2.FileSystemLoader('./')      
               ).get_template('template.html').render(title=title,mydata=payload) 
 with open(outputfile,'wb') as f: f.write(subs.encode('utf-8'))
 
+upload_html('datawrapper_chart_overview.html')
 
